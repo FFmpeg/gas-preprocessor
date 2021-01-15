@@ -130,7 +130,7 @@ if ($as_type eq "armasm") {
 
     # If not preprocessing for getting a dependency list, use cl.exe
     # instead.
-    $preprocess_c_cmd[0] = "cl";
+    $preprocess_c_cmd[0] = "cl.exe";
 }
 
 # if compiling, avoid creating an output file named '-.o'
@@ -213,6 +213,8 @@ if (!$arch) {
 
 # assume we're not cross-compiling if no -arch or the binary doesn't have the arch name
 $arch = qx/arch/ if (!$arch);
+# remove any whitespace, e.g. arch command might print a newline
+$arch =~ s/\s+//g;
 
 die "Unknown target architecture '$arch'" if not exists $canonical_arch{$arch};
 
