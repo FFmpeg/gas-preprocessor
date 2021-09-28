@@ -342,7 +342,7 @@ sub handle_if {
             $result = eval_expr($expr) < 0;
         } else {
             chomp($line);
-            die "unhandled .if varient. \"$line\"";
+            die "unhandled .if variant. \"$line\"";
         }
         push (@ifstack, $result);
         return 1;
@@ -800,7 +800,7 @@ sub handle_serialized_line {
         # This line seems to possibly have a neon instruction
         foreach (keys %neon_alias_reg) {
             my $alias = $_;
-            # Require the register alias to match as an invididual word, not as a substring
+            # Require the register alias to match as an individual word, not as a substring
             # of a larger word-token.
             if ($line =~ /\b$alias\b/) {
                 $line =~ s/\b$alias\b/$neon_alias_reg{$alias}/g;
@@ -893,7 +893,7 @@ sub handle_serialized_line {
             my $name = "temp_label_$temp_label_next";
             $temp_label_next++;
             # The matching regexp above removes the label from the start of
-            # the line (which might contain an instruction as well), readd
+            # the line (which might contain an instruction as well), re-add
             # it on a separate line above it.
             $line = "$name:\n" . $line;
             $last_temp_labels{$num} = $name;
